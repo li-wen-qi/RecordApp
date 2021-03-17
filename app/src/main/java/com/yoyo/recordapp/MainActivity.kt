@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.yoyo.recordapp.utils.SystemOperatorGlobalUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.view.*
@@ -24,10 +25,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(it, "点击纪录", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-        fab.setOnClickListener {
-            Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
