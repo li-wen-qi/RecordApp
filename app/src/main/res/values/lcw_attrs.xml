@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <declare-styleable name="BGASwipeItemLayout">
+        <attr format="enum" name="bga_sil_swipeDirection">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr format="enum" name="bga_sil_bottomMode">
+            <enum name="pullOut" value="0"/>
+            <enum name="layDown" value="1"/>
+        </attr>
+        <attr format="dimension" name="bga_sil_springDistance"/>
+        <attr format="boolean" name="bga_sil_swipeAble"/>
+    </declare-styleable>
+
+    <declare-styleable name="AppToolbar">
+        <attr format="reference" name="rightIcon"/>
+        <attr format="reference" name="leftIcon"/>
+        <attr format="boolean" name="isShowRightView"/>
+        <attr format="boolean" name="isShowSearchView"/>
+        <attr format="string" name="title"/>
+        <attr format="dimension" name="titleSize"/>
+        <attr format="color" name="titleColor"/>
+        <attr format="boolean" name="isHideLeftView"/>
+        <attr format="boolean" name="isTitleUpperCase"/>
+        <attr format="color" name="BackgroundColor"/>
+        <attr format="string" name="rightText"/>
+        <attr format="color" name="rightTextColor"/>
+        <attr format="reference" name="righSubIcon"/>
+    </declare-styleable>
+
+    <declare-styleable name="Indicator">
+        <!--未选中的指示器颜色-->
+        <attr format="reference|color" name="normal_color"/>
+        <!--选中的指示器颜色-->
+        <attr format="reference|color" name="selected_color"/>
+        <!--指示器每个item之间的间距-->
+        <attr format="dimension" name="spacing"/>
+        <!--指示器排列方向-->
+        <attr format="enum" name="orientation">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
+        <!--指示器类型 命名规则：未选中样式_选中样式-->
+        <attr format="enum" name="style">
+            <!--都是圆点-->
+            <enum name="circle_circle" value="0"/>
+            <!--都是方形-->
+            <enum name="rect_rect" value="1"/>
+            <!--未选中是圆点，选中是方形-->
+            <enum name="circle_rect" value="2"/>
+        </attr>
+        <!--都是圆点指示器半径大小-->
+        <attr format="dimension" name="circle_circle_radius"/>
+        <!--都是方形指示器长度-->
+        <attr format="dimension" name="rect_rect_itemWidth"/>
+        <!--都是方形指示器高度-->
+        <attr format="dimension" name="rect_rect_itemHeight"/>
+        <!--都是方形指示器圆角-->
+        <attr format="dimension" name="rect_rect_corner"/>
+        <!--circle_rect 模式圆点半径-->
+        <attr format="dimension" name="circle_rect_radius"/>
+        <!--circle_rect 模式方形宽度-->
+        <attr format="dimension" name="circle_rect_itemWidth"/>
+        <!--circle_rect 模式方形高度-->
+        <attr format="dimension" name="circle_rect_itemHeight"/>
+        <!--circle_rect 模式方形圆角-->
+        <attr format="dimension" name="circle_rect_corner"/>
+    </declare-styleable>
+
+    <declare-styleable name="SeatView">
+        <attr format="string" name="seat"/>
+    </declare-styleable>
+
+    <declare-styleable name="circleProgressBar">
+        <attr format="dimension" name="circleWidth"/>
+        <attr format="reference|color" name="fillColor"/>
+        <attr format="reference|color" name="backColor"/>
+    </declare-styleable>
+</resources>
