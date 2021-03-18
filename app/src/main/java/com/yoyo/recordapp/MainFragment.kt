@@ -10,10 +10,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.internal.ViewUtils.dpToPx
 import com.yoyo.recordapp.bean.Word
 import com.yoyo.recordapp.db.AppDataBase
+import com.yoyo.recordapp.utils.ImageCached
+import com.yoyo.recordapp.utils.ImageCached.dp2px
+import com.yoyo.recordapp.utils.ImageCached.thumbnail
 import com.yoyo.recordapp.utils.Injection
 import com.yoyo.recordapp.utils.NumberAnimHelper
+import com.yoyo.recordapp.utils.load
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -54,6 +61,8 @@ class MainFragment : Fragment() {
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_MainFragment_to_WordAddFragment)
         }
+        imgvAvatar.load(Constants.AVATAR_URL,  transformation = Injection.transformCropCircle)
+
         initRecycler()
         queryWordList()
     }

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
-
     <com.yoyo.recordapp.utils.AppToolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
@@ -31,20 +30,22 @@
         android:fontFamily="sans-serif-black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/imgvAvatar"
         android:layout_marginStart="10dp"
-        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolBar"
         app:layout_constraintBottom_toBottomOf="@+id/toolBar"
         android:layout_width="50dp"
         android:layout_height="50dp" />
+
     <View
         android:id="@+id/divider_view"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#f9f9f9"
+        android:layout_marginTop="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolBar" />
