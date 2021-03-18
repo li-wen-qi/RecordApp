@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yoyo.recordapp.bean.Word
@@ -35,26 +36,38 @@ class ListAdapter(
         return list.size
     }
 
+
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         var word = list[position]
         holder.tvNum!!.setText(word.id.toString())
         holder.tvName!!.setText(word.name.toString())
         holder.tvExample!!.setText(word.example.toString())
 
-//        holder.deleteTv!!.setOnClickListener {
-//            AppDataBase.getInstance(context).wordDao().deleteWord(word)
-//            clickListener?.deleteClick()
-//        }
-//        holder.updateTv!!.setOnClickListener {
-//            clickListener?.updateClick(word)
-//        }
+        holder.itemView.setOnLongClickListener {
+            val popupMenu = PopupMenu(context, it)
+            popupMenu.menuInflater.inflate(R.menu.menu_main, popupMenu.menu)
+            popupMenu.show()
+            popupMenu.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.action_delete ->{
+                        clickListener?.deleteClick(word)
+                        false
+                    }
+                    else -> {
+                        clickListener?.updateClick(word)
+                        false
+                    }
+                }
+            }
+            false
+        }
     }
 
 }
 
 interface ClickListener {
-    fun deleteClick()
-    fun updateClick(user:Word)
+    fun deleteClick(word:Word)
+    fun updateClick(word:Word)
 }
 
 class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {

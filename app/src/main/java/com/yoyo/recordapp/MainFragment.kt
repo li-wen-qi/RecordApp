@@ -1,5 +1,6 @@
 package com.yoyo.recordapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,14 +23,18 @@ class MainFragment : Fragment() {
     private var mDisposables: CompositeDisposable? = null
     private val listAdapter: ListAdapter by lazy {
         ListAdapter(requireContext(), wordList, object : ClickListener {
-            override fun deleteClick() {
+            override fun deleteClick(word :Word) {
                 //删除
-                Toast.makeText(requireContext(), "删除", Toast.LENGTH_LONG).show()
+                AppDataBase.getInstance(requireContext()).wordDao().deleteWord(word)
+                queryWordList()
             }
 
             override fun updateClick(word: Word) {
                 //更新
                 Toast.makeText(requireContext(), "更新", Toast.LENGTH_LONG).show()
+//                var intent = Intent(this@MainActivity, UpdateUserActivity::class.java)
+//                intent.putExtra(UpdateUserActivity.INTENT_TAG_USER, user)
+//                startActivity(intent)
             }
 
         })
@@ -50,7 +55,7 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_MainFragment_to_WordAddFragment)
         }
         initRecycler()
-        getUserList()
+        queryWordList()
     }
 
     private fun initRecycler() {
@@ -60,7 +65,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun getUserList() {
+    private fun queryWordList() {
         var disposable =
             AppDataBase.getInstance(requireContext()).wordDao().getWords().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -83,7 +88,7 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         try {
-            getUserList()
+            queryWordList()
         } catch (e: Exception) {
         }
     }
