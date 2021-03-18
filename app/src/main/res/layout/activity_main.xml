@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginBottom="0dp"
-        app:title="Room" />
+        app:title="Room测试" />
 
     <include layout="@layout/content_main" />
 
