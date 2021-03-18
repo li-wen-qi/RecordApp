@@ -7,35 +7,35 @@ import androidx.room.PrimaryKey
 
 
 @Entity
-data class User(
+data class Word(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var name: String?,
-    var gender: Int
+    var example: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
-        parcel.readInt()
+        parcel.readString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(name)
-        parcel.writeInt(gender)
+        parcel.writeString(example)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<User> {
-        override fun createFromParcel(parcel: Parcel): User {
-            return User(parcel)
+    companion object CREATOR : Parcelable.Creator<Word> {
+        override fun createFromParcel(parcel: Parcel): Word {
+            return Word(parcel)
         }
 
-        override fun newArray(size: Int): Array<User?> {
+        override fun newArray(size: Int): Array<Word?> {
             return arrayOfNulls(size)
         }
     }

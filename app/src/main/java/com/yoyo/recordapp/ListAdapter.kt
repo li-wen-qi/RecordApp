@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.yoyo.recordapp.bean.User
+import com.yoyo.recordapp.bean.Word
 import com.yoyo.recordapp.db.AppDataBase
 
 class ListAdapter(
     private var context: Context,
-    private var list: MutableList<User>,
+    private var list: MutableList<Word>,
     clickListener: ClickListener
 ) :
     RecyclerView.Adapter<ListViewHolder>() {
@@ -27,9 +27,7 @@ class ListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        var view = layoutInflater?.inflate(R.layout.item_user, parent, false)!!
-
-
+        var view = layoutInflater?.inflate(R.layout.item_word, parent, false)!!
 
         return ListViewHolder(view)
     }
@@ -39,43 +37,40 @@ class ListAdapter(
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        var user = list[position]
-        holder.tvNum!!.setText(user.id.toString())
-        holder.tvName!!.setText(user.name.toString())
-        if (user.gender == 0) {
-            holder.tvSex!!.setText("男")
-        } else {
-            holder.tvSex!!.setText("女")
-        }
-        holder.deleteTv!!.setOnClickListener {
-            AppDataBase.getInstance(context).userDao().deleteUser(user)
-            clickListener?.deleteClick()
-        }
-        holder.updateTv!!.setOnClickListener {
-            clickListener?.updateClick(user)
-        }
+        var word = list[position]
+        holder.tvNum!!.setText(word.id.toString())
+        holder.tvName!!.setText(word.name.toString())
+        holder.tvExample!!.setText(word.example.toString())
+
+//        holder.deleteTv!!.setOnClickListener {
+//            AppDataBase.getInstance(context).wordDao().deleteWord(word)
+//            clickListener?.deleteClick()
+//        }
+//        holder.updateTv!!.setOnClickListener {
+//            clickListener?.updateClick(word)
+//        }
     }
 
 }
 
 interface ClickListener {
     fun deleteClick()
-    fun updateClick(user:User)
+    fun updateClick(user:Word)
 }
 
 class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    public var tvNum: TextView? = null
-    public var tvName: TextView? = null
-    public var tvSex: TextView? = null
-    public var updateTv: TextView? = null
-    public var deleteTv: TextView? = null
+    var tvNum: TextView? = null
+    var tvName: TextView? = null
+    var tvExample: TextView? = null
+//    var updateTv: TextView? = null
+//    var deleteTv: TextView? = null
 
     init {
         tvNum = view.findViewById(R.id.tvNum)
         tvName = view.findViewById(R.id.tvName)
-        tvSex = view.findViewById(R.id.tvSex)
-        updateTv = view.findViewById(R.id.tvUpdate)
-        deleteTv = view.findViewById(R.id.tvDelete)
+        tvExample = view.findViewById(R.id.tvExample)
+//        updateTv = view.findViewById(R.id.tvUpdate)
+//        deleteTv = view.findViewById(R.id.tvDelete)
     }
 
 }
