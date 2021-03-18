@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yoyo.recordapp.bean.Word
-import com.yoyo.recordapp.db.AppDataBase
 
 class ListAdapter(
     private var context: Context,

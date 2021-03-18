@@ -4,9 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="150dp">
-
+    android:layout_height="match_parent">
+    <com.yoyo.recordapp.utils.AppToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:BackgroundColor="@color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginBottom="0dp"
+        app:title="添 加" />
     <TextView
         android:id="@+id/wordTitle"
         android:layout_width="wrap_content"
@@ -15,11 +23,12 @@
         android:gravity="center_vertical"
         android:paddingStart="15dp"
         android:paddingEnd="0dp"
+        android:layout_marginTop="100dp"
         android:text="单词"
         android:textColor="#333"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
     <EditText
@@ -28,6 +37,7 @@
         android:layout_height="50dp"
         android:background="@null"
         android:inputType="text"
+        android:layout_marginTop="100dp"
         android:gravity="center_vertical"
         android:hint="请输入单词"
         android:paddingStart="10dp"
@@ -38,7 +48,7 @@
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/wordTitle"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <View
         android:id="@+id/divider_view_1"
@@ -103,7 +113,7 @@
         android:gravity="center"
         android:minHeight="44dp"
         android:singleLine="true"
-        android:text="添 加"
+        android:text="确 定"
         android:textColor="#fff"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -18,14 +18,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         SystemOperatorGlobalUtils.setStatusBarColor(this, R.color.white)
         SystemOperatorGlobalUtils.setStatusBarDarkMode(true, this)
-
-        toolbar.iv_left.visibility = View.INVISIBLE
-        toolbar.setRightText("纪录")
-        toolbar.tv_right.setOnClickListener {
-            Snackbar.make(it, "点击纪录", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

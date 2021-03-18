@@ -6,19 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.yoyo.recordapp.utils.AppToolbar
-        android:id="@+id/toolbar"
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:BackgroundColor="@color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginBottom="0dp"
-        app:title="Room测试" />
-
-    <include layout="@layout/content_main" />
-
-
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
