@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.yoyo.recordapp.bean.Word
 import com.yoyo.recordapp.db.AppDataBase
 import kotlinx.android.synthetic.main.fragment_add_word.*
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 
 class WordAddFragment : Fragment() {
@@ -29,9 +30,12 @@ class WordAddFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnAdd.setOnClickListener {
-            val imm = activity?.applicationContext?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager?
-            imm?.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
+            hideSoftInputManager()
             addWord()
+        }
+        toolbar.iv_left.setOnClickListener {
+            hideSoftInputManager()
+            findNavController().navigate(R.id.action_WordAddFragment_to_MainFragment)
         }
     }
 
@@ -49,5 +53,11 @@ class WordAddFragment : Fragment() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun hideSoftInputManager(){
+        val imm = activity?.applicationContext?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager?
+        //imm?.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
+        imm?.hideSoftInputFromWindow(wordText.windowToken, 0)
     }
 }
