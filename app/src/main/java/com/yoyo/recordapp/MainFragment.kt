@@ -1,5 +1,6 @@
 package com.yoyo.recordapp
 
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yoyo.recordapp.bean.Word
 import com.yoyo.recordapp.db.AppDataBase
+import com.yoyo.recordapp.utils.Injection
+import com.yoyo.recordapp.utils.NumberAnimHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -18,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 
 class MainFragment : Fragment() {
-
+    private var animator: ValueAnimator? = null
     private var wordList: MutableList<Word> = mutableListOf()
     private var mDisposables: CompositeDisposable? = null
     private val listAdapter: ListAdapter by lazy {
@@ -47,7 +50,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolbar.iv_left.visibility = View.INVISIBLE
+        toolBar.iv_left.visibility = View.INVISIBLE
         fab.setOnClickListener {
             findNavController().navigate(R.id.action_MainFragment_to_WordAddFragment)
         }
@@ -70,6 +73,8 @@ class MainFragment : Fragment() {
                     wordList.clear()
                     wordList.addAll(it)
                     listAdapter.notifyDataSetChanged()
+                    tvCount.text = wordList.size.toString()
+                    startNumberAnimation()
                 }, {
 
                 })
@@ -80,13 +85,39 @@ class MainFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         mDisposables?.clear()
+
     }
 
+    override fun onPause() {
+        super.onPause()
+        stopNumberAnimation()
+    }
     override fun onResume() {
         super.onResume()
         try {
             queryWordList()
         } catch (e: Exception) {
         }
+    }
+
+    private fun stopNumberAnimation() {
+        animator?.cancel()
+    }
+
+    private fun startNumberAnimation() {
+        animator?.cancel()
+        animator = NumberAnimHelper.provideAnimator(1f, 1.2f)
+            .apply {
+                duration = 800
+                repeatMode = ValueAnimator.REVERSE
+                repeatCount = ValueAnimator.INFINITE
+                interpolator = Injection.accelerateDecelerateInterpolator
+                addUpdateListener {
+                    val value = it.animatedValue as Float
+                    tvCount.scaleX = value
+                    tvCount.scaleY = value
+                }
+            }
+        animator?.start()
     }
 }
