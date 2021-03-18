@@ -31,10 +31,7 @@ class MainFragment : Fragment() {
 
             override fun updateClick(word: Word) {
                 //更新
-                Toast.makeText(requireContext(), "更新", Toast.LENGTH_LONG).show()
-//                var intent = Intent(this@MainActivity, UpdateUserActivity::class.java)
-//                intent.putExtra(UpdateUserActivity.INTENT_TAG_USER, user)
-//                startActivity(intent)
+                WordModifyActivity.start(requireContext(), word)
             }
 
         })

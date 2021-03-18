@@ -14,7 +14,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginBottom="0dp"
-        app:title="添 加" />
+        app:title="修 改" />
+
+    <TextView
+        android:id="@+id/wordNum"
+        android:layout_marginTop="100dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:gravity="end|center_vertical"
+        android:paddingStart="15dp"
+        android:paddingEnd="0dp"
+        android:text="ID"
+        android:textColor="#333"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/wordTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+    <EditText
+        android:id="@+id/wordNumText"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:inputType="text"
+        android:enabled="false"
+        android:layout_marginTop="100dp"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="15dp"
+        android:singleLine="true"
+        android:textColor="#C6C6C6"
+        android:textColorHint="#C6C6C6"
+        android:textSize="14dp"
+        tools:text="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/wordNum"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
     <TextView
         android:id="@+id/wordTitle"
         android:layout_width="wrap_content"
@@ -23,12 +61,11 @@
         android:gravity="center_vertical"
         android:paddingStart="15dp"
         android:paddingEnd="0dp"
-        android:layout_marginTop="100dp"
         android:text="单词"
         android:textColor="#333"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/wordNum" />
 
 
     <EditText
@@ -37,7 +74,7 @@
         android:layout_height="50dp"
         android:background="@null"
         android:inputType="text"
-        android:layout_marginTop="100dp"
+
         android:gravity="center_vertical"
         android:hint="请输入单词"
         android:paddingStart="10dp"
@@ -48,7 +85,7 @@
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/wordTitle"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/wordNum" />
 
     <View
         android:id="@+id/divider_view_1"
@@ -91,8 +128,6 @@
         app:layout_constraintStart_toEndOf="@id/exampleTitle"
         app:layout_constraintTop_toBottomOf="@+id/wordTitle" />
 
-
-
     <View
         android:id="@+id/divider_view_2"
         android:layout_width="0dp"
@@ -102,7 +137,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exampleText" />
     <TextView
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
