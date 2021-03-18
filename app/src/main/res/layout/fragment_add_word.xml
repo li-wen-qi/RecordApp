@@ -2,26 +2,113 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WordAddFragment">
+    android:paddingTop="70dp">
 
     <TextView
-        android:id="@+id/textview_second"
+        android:id="@+id/wordTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:paddingEnd="0dp"
+        android:text="单词"
+        android:textColor="#333"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <EditText
+        android:id="@+id/wordText"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:inputType="text"
+        android:gravity="center_vertical"
+        android:hint="请输入单词"
+        android:paddingStart="10dp"
+        android:paddingEnd="15dp"
+        android:singleLine="true"
+        android:textColor="#333"
+        android:textColorHint="#C6C6C6"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/wordTitle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider_view_1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#f9f9f9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
+        app:layout_constraintTop_toBottomOf="@+id/wordText" />
+
+    <TextView
+        android:id="@+id/exampleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:paddingEnd="0dp"
+        android:text="例句"
+        android:textColor="#333"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wordTitle" />
+
+    <EditText
+        android:id="@+id/exampleText"
+        android:layout_width="0dp"
+        android:minHeight="50dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@null"
+        android:textColor="#C6C6C6"
+        android:textColorHint="#ffcbcdd0"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:hint="请输入例句"
+        tools:text="打发大水发生法发大水发生发发发生阿斯顿发送到发送发送阿斯顿发大水发大水发顺丰"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/exampleTitle"
+        app:layout_constraintTop_toBottomOf="@+id/wordTitle" />
+
+
+
+    <View
+        android:id="@+id/divider_view_2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#f9f9f9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exampleText" />
+    <TextView
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="55dp"
+        android:background="@drawable/shape_gradient_ff6f6f_ffa128_30"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:minHeight="44dp"
+        android:singleLine="true"
+        android:text="添 加"
+        android:textColor="#fff"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exampleText" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
