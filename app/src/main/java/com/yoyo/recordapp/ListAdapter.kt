@@ -41,6 +41,7 @@ class ListAdapter(
         var word = list[position]
         holder.tvNum!!.setText(word.id.toString())
         holder.tvName!!.setText(word.name.toString())
+        holder.tvMean!!.setText(word.mean.toString())
         holder.tvExample!!.setText(word.example.toString())
 
         holder.itemView.setOnLongClickListener {
@@ -73,13 +74,16 @@ interface ClickListener {
 class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var tvNum: TextView? = null
     var tvName: TextView? = null
+    var tvMean: TextView? = null
     var tvExample: TextView? = null
+
 //    var updateTv: TextView? = null
 //    var deleteTv: TextView? = null
 
     init {
         tvNum = view.findViewById(R.id.tvNum)
         tvName = view.findViewById(R.id.tvName)
+        tvMean = view.findViewById(R.id.tvMean)
         tvExample = view.findViewById(R.id.tvExample)
 //        updateTv = view.findViewById(R.id.tvUpdate)
 //        deleteTv = view.findViewById(R.id.tvDelete)

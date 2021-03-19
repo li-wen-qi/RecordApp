@@ -41,11 +41,12 @@ class WordAddFragment : Fragment() {
     private fun addWord() {
         val name = wordText.text.toString()
         val example = exampleText.text.toString()
+        val mean = meanText.text.toString()
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(requireContext(), "请输入单词", Toast.LENGTH_SHORT).show()
             return
         }
-        var word = Word(0, name, example)
+        var word = Word(0, name, mean, example)
         try {
             AppDataBase.getInstance(requireContext()).wordDao().insertWord(word)
             findNavController().navigate(R.id.action_WordAddFragment_to_MainFragment)

@@ -30,6 +30,7 @@ class WordModifyActivity : AppCompatActivity() {
     private fun initView(){
         wordNumText.setText(word.id.toString())
         wordText.setText(word.name)
+        meanText.setText(word.mean)
         exampleText.setText(word.example)
         btnUpdate.setOnClickListener {
             updateWord()
@@ -44,7 +45,7 @@ class WordModifyActivity : AppCompatActivity() {
         }
 
         try {
-            val word = Word(wordNumText.text.toString().toInt(), name, exampleText.text.toString())
+            val word = Word(wordNumText.text.toString().toInt(), name, meanText.text.toString(), exampleText.text.toString())
             AppDataBase.getInstance(this).wordDao().updateWord(word)
             finish()
         } catch (e: Exception) {

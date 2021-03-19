@@ -1,25 +1,17 @@
 package com.yoyo.recordapp
 
 import android.animation.ValueAnimator
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.internal.ViewUtils.dpToPx
 import com.yoyo.recordapp.bean.Word
 import com.yoyo.recordapp.db.AppDataBase
-import com.yoyo.recordapp.utils.ImageCached
-import com.yoyo.recordapp.utils.ImageCached.dp2px
-import com.yoyo.recordapp.utils.ImageCached.thumbnail
 import com.yoyo.recordapp.utils.Injection
-import com.yoyo.recordapp.utils.NumberAnimHelper
 import com.yoyo.recordapp.utils.load
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -28,12 +20,12 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 
 class MainFragment : Fragment() {
-    private var animator: ValueAnimator? = null
+    private val animator = ValueAnimator.ofInt(0, 100)
     private var wordList: MutableList<Word> = mutableListOf()
     private var mDisposables: CompositeDisposable? = null
     private val listAdapter: ListAdapter by lazy {
         ListAdapter(requireContext(), wordList, object : ClickListener {
-            override fun deleteClick(word :Word) {
+            override fun deleteClick(word: Word) {
                 //删除
                 AppDataBase.getInstance(requireContext()).wordDao().deleteWord(word)
                 queryWordList()
@@ -48,8 +40,8 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false)
@@ -58,11 +50,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolBar.iv_left.visibility = View.INVISIBLE
-        fab.setOnClickListener {
+        toolBar.setRightText("添加")
+        toolBar.setOnRightTvClickListener {
             findNavController().navigate(R.id.action_MainFragment_to_WordAddFragment)
         }
-        imgvAvatar.load(Constants.AVATAR_URL,  transformation = Injection.transformCropCircle)
-
+        refreshLayout.setOnRefreshListener {
+            queryWordList()
+        }
+        imgvAvatar.load(Constants.AVATAR_URL, transformation = Injection.transformCropCircle)
         initRecycler()
         queryWordList()
     }
@@ -82,8 +77,8 @@ class MainFragment : Fragment() {
                     wordList.clear()
                     wordList.addAll(it)
                     listAdapter.notifyDataSetChanged()
-                    tvCount.text = wordList.size.toString()
-                    startNumberAnimation()
+                    startLeafLoadingView()
+                    refreshLayout.isRefreshing = false
                 }, {
 
                 })
@@ -99,8 +94,9 @@ class MainFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        stopNumberAnimation()
+        stopLeafLoadingAnimation()
     }
+
     override fun onResume() {
         super.onResume()
         try {
@@ -109,24 +105,19 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun stopNumberAnimation() {
-        animator?.cancel()
+    private fun startLeafLoadingView(){
+        animator?.duration = 3000
+        animator.addUpdateListener { animation ->
+            if (animation.animatedValue as Int == 70) {
+                animator.cancel()
+            }
+            leafLoading.setCurrentProgress(animation.animatedValue as Int)
+        }
+        animator.start()
+        leafLoading.setNumber(70)
     }
 
-    private fun startNumberAnimation() {
+    private fun stopLeafLoadingAnimation() {
         animator?.cancel()
-        animator = NumberAnimHelper.provideAnimator(1f, 1.2f)
-            .apply {
-                duration = 800
-                repeatMode = ValueAnimator.REVERSE
-                repeatCount = ValueAnimator.INFINITE
-                interpolator = Injection.accelerateDecelerateInterpolator
-                addUpdateListener {
-                    val value = it.animatedValue as Float
-                    tvCount.scaleX = value
-                    tvCount.scaleY = value
-                }
-            }
-        animator?.start()
     }
 }

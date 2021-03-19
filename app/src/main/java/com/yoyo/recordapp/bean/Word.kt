@@ -11,10 +11,12 @@ data class Word(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var name: String?,
+    var mean: String?,
     var example: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString()
     ) {
@@ -23,6 +25,7 @@ data class Word(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(name)
+        parcel.writeString(mean)
         parcel.writeString(example)
     }
 
