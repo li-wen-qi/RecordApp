@@ -19,4 +19,5 @@ class MainActivity : AppCompatActivity() {
         SystemOperatorGlobalUtils.setStatusBarColor(this, R.color.white)
         SystemOperatorGlobalUtils.setStatusBarDarkMode(true, this)
     }
+
 }

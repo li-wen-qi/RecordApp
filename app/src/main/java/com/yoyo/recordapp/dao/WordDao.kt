@@ -7,7 +7,7 @@ import io.reactivex.Single
 @Dao
 interface WordDao {
 
-    @Query("SELECT * FROM word")
+    @Query("SELECT * FROM word ORDER BY id DESC")
     fun getWords(): Single<MutableList<Word>>
 
     @Query("SELECT * FROM word where id=:id")

@@ -13,11 +13,13 @@ import com.yoyo.recordapp.bean.Word
 import com.yoyo.recordapp.db.AppDataBase
 import com.yoyo.recordapp.utils.Injection
 import com.yoyo.recordapp.utils.load
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.toolbar.view.*
+import java.util.concurrent.TimeUnit
 
 class MainFragment : Fragment() {
     private val animator = ValueAnimator.ofInt(0, 100)
@@ -55,11 +57,11 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_MainFragment_to_WordAddFragment)
         }
         refreshLayout.setOnRefreshListener {
+            leafLoading.leafCount = 7
             queryWordList()
         }
         imgvAvatar.load(Constants.AVATAR_URL, transformation = Injection.transformCropCircle)
         initRecycler()
-        queryWordList()
     }
 
     private fun initRecycler() {
@@ -78,6 +80,7 @@ class MainFragment : Fragment() {
                     wordList.addAll(it)
                     listAdapter.notifyDataSetChanged()
                     startLeafLoadingView()
+
                     refreshLayout.isRefreshing = false
                 }, {
 
@@ -106,15 +109,16 @@ class MainFragment : Fragment() {
     }
 
     private fun startLeafLoadingView(){
-        animator?.duration = 3000
+        animator?.duration = 7000
         animator.addUpdateListener { animation ->
-            if (animation.animatedValue as Int == 70) {
+            if (animation.animatedValue as Int == wordList.size) {
                 animator.cancel()
             }
             leafLoading.setCurrentProgress(animation.animatedValue as Int)
         }
         animator.start()
-        leafLoading.setNumber(70)
+        leafLoading.setNumber(wordList.size)
+
     }
 
     private fun stopLeafLoadingAnimation() {
