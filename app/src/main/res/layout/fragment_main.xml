@@ -64,7 +64,7 @@
     <com.yoyo.recordapp.utils.LeafView
         android:id="@+id/leafView"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginBottom="1dp"
         app:layout_constraintTop_toTopOf="parent"
